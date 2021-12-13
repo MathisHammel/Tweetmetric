@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 pkill -f "fetch_loop.py"
 pkill -f "viz_server.py"
 nohup python -u fetch_loop.py 2>&1 > log_fetch.log &

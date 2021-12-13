@@ -2,7 +2,7 @@
 
 Tweetmetric allows you to track various metrics on your most recent tweets, such as impressions, retweets and clicks on your profile.
 
-![example image](./dashboard.png)
+![example image](./img/dashboard.png)
 
 The code is in Python, and the frontend uses Dash (a Plotly web interface). Tweetmetric uses Redis  as a fast database
 
@@ -13,7 +13,8 @@ The code is in Python, and the frontend uses Dash (a Plotly web interface). Twee
 Run the following commands to install the project and start Redis:
 
 ```bash
-pip install redis dash pandas tweepy pytz
+cd src
+pip install -r requirements.txt
 sudo apt install redis
 redis-server
 ```
