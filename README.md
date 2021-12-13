@@ -15,7 +15,8 @@ Run the following commands to install the project and start Redis:
 ```bash
 pip install redis dash pandas tweepy pytz
 sudo apt install redis
-redis-server```
+redis-server
+```
 
 If you want the database to be persistent after reboots, enable Redis AOF by adding `appendonly yes` to your Redis configuration file (usually in /etc/redis/redis.conf)
 
