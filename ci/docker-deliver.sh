@@ -1,7 +1,6 @@
 #!/bin/bash
 
-BASE_DIR="$(dirname $0)"
-REPO_PATH="${BASE_DIR}/.."
+REPO_PATH="${PROJECT_HOME}/Tweetmetric/"
 IMAGE="${1}"
 VERSION="${2}"
 
