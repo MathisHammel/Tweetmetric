@@ -4,8 +4,22 @@ Tweetmetric allows you to track various metrics on your most recent tweets, such
 
 ![example image](./img/dashboard.png)
 
-The code is in Python, and the frontend uses Dash (a Plotly web interface). Tweetmetric uses Redis  as a fast database
+The code is in Python, and the frontend uses Dash (a Plotly web interface). Tweetmetric uses Redis as a fast database
 
+## Git repositories
+
+* Build repo: https://gitlab.comwork.io/oss/Tweetmetric (with CI/CD pipelines delivering docker images on docker hub)
+* Github mirror/fork: https://github.com/idrissneumann/Tweetmetric (automatically up to date with the CI/CD)
+* Original repo: https://github.com/MathisHammel/Tweetmetric
+
+## Docker images
+
+You'll find ready to use images on docker hub:
+
+* [tweetmetric-fetch-loop](https://hub.docker.com/repository/docker/comworkio/tweetmetric-fetch-loop)
+* [tweetmetric-viz-server](https://hub.docker.com/repository/docker/comworkio/tweetmetric-viz-server)
+
+You'll find how to use those images with this [docker-compose file](./docker-compose.yml).
 ## Getting started
 
 Install `docker` and `docker-compose`.
