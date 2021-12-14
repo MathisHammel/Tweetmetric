@@ -10,15 +10,11 @@ tag_and_push() {
   docker push "comworkio/${2}:${1}"
 }
 
-cd "${REPO_PATH}" && git pull origin "${GIT_BRANCH}" || : 
-git config --global user.email "${GIT_EMAIL}"
-git config --global user.name "${GIT_EMAIL}"
-sha="$(git rev-parse --short HEAD)"
-echo '{"version":"'"${VERSION}"'", "sha":"'"${sha}"'", "arch":"'"${ARCH}"'"}' > manifest.json
-
-COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build "${IMAGE}"
+cd "${REPO_PATH}" && git pull origin "${GIT_BRANCH}" || :
 
 echo "${DOCKER_ACCESS_TOKEN}" | docker login --username "${DOCKER_USERNAME}" --password-stdin
+
+COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build "${IMAGE}"
 
 tag_and_push "latest" "${IMAGE}"
 tag_and_push "${VERSION}" "${IMAGE}"

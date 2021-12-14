@@ -28,7 +28,7 @@ fetch-loop:
   tags:
     - tweetmetric
 
-tweetmetric-viz-server:
+viz-server:
   stage: deliver
   script:
     - setsid ./ci/docker-deliver.sh "tweetmetric-viz-server" "2.2"
