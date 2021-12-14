@@ -21,7 +21,8 @@ USER_ID = api_secrets.USER_ACCESS_TOKEN.split('-')[0]
 
 redis_cli = redis.Redis(host=os.environ['REDIS_HOST'], port=int(os.environ['REDIS_PORT']), db=0)
 
-tweepy_client = tweepy.Client(consumer_key=api_secrets.API_KEY,
+tweepy_client = tweepy.Client(bearer_token=api_secrets.BEARER_TOKEN,
+                       consumer_key=api_secrets.API_KEY,
                        consumer_secret=api_secrets.API_KEY_SECRET,
                        access_token=api_secrets.USER_ACCESS_TOKEN,
                        access_token_secret=api_secrets.USER_ACCESS_TOKEN_SECRET)

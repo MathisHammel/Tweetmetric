@@ -1,0 +1,61 @@
+stages:
+  - publish
+  - deliver
+  - deploy
+
+mirror:
+  stage: publish
+  script:
+    - setsid ./ci/mirror.sh
+  only:
+    - /^(main.*)$/
+  tags:
+    - tweetmetric
+
+fetch-loop:
+  stage: deliver
+  script:
+    - setsid ./ci/docker-deliver.sh "tweetmetric-fetch-loop" "2.2"
+  only:
+    refs:
+      - /^(main.*)$/
+    changes:
+      - .gitlab-ci.yml
+      - src/*
+      - ci/docker-deliver.sh
+      - docker-compose.yml
+      - Dockerfile
+  tags:
+    - tweetmetric
+
+tweetmetric-viz-server:
+  stage: deliver
+  script:
+    - setsid ./ci/docker-deliver.sh "tweetmetric-viz-server" "2.2"
+  only:
+    refs:
+      - /^(main.*)$/
+    changes:
+      - .gitlab-ci.yml
+      - src/*
+      - ci/docker-deliver.sh
+      - docker-compose.yml
+      - Dockerfile
+  tags:
+    - tweetmetric
+
+deploy:
+  stage: deploy
+  script:
+    - setsid ./ci/deploy.sh
+  only:
+    refs:
+      - /^(main.*)$/
+    changes:
+      - .gitlab-ci.yml
+      - src/*
+      - ci/deploy.sh
+      - docker-compose.yml
+      - Dockerfile
+  tags:
+    - tweetmetric
