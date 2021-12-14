@@ -1,5 +1,5 @@
-redis 
-dash 
-pandas 
-tweepy 
+redis
+dash
+tweepy
 pytz
+pandas
