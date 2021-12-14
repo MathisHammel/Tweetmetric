@@ -12,7 +12,7 @@ The code is in Python, and the frontend uses Dash (a Plotly web interface). Twee
 
 Run the following commands to install the project and start Redis:
 
-```bash
+```shell
 cd src
 pip install -r requirements.txt
 sudo apt install redis
@@ -26,12 +26,15 @@ If you want the database to be persistent after reboots, enable Redis AOF by add
 Tweetmetric uses private metrics that can only be accessed by the Tweet's owner. You need to provide your API keys to the program so it can work.
 - Request a Twitter API key on [The Twitter developer portal](https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api). This only takes a couple minutes, you need to have a verified phone number on your account.
 - Generate a user token for the app you just created on [the developer dashboard](https://developer.twitter.com/en/portal/dashboard)
-- You should now have 5 secrets provided by Twitter. Store them in their corresponding strings inside api_secrets.py
+- You should now have 5 secrets provided by Twitter. Store them in their corresponding strings inside a `.env` file (you can create it from the [`.env.dist`](./.env.dist) example)
 
 ### Start
 
 Your environment should be ready now. To run the server in background :
 
-`./launch.sh` 
+```shell
+$ cd src
+$ ./launch.sh
+```
 
 This command displays server logs, but exiting with Ctrl-C will not kill the server.
