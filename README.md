@@ -10,6 +10,7 @@ The code is in Python, and the frontend uses Dash (a Plotly web interface). Twee
 
 * Build repo: https://gitlab.comwork.io/oss/Tweetmetric (with CI/CD pipelines delivering docker images on docker hub)
 * Github mirror/fork: https://github.com/idrissneumann/Tweetmetric (automatically up to date with the CI/CD)
+* Gitlab mirror: https://gitlab.com/ineumann/Tweetmetric
 * Original repo: https://github.com/MathisHammel/Tweetmetric
 
 ## Docker images
