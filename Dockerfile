@@ -3,7 +3,7 @@ FROM python:3-alpine AS tweet_metric_base
 ENV PYTHONUNBUFFERED=1 \
     PYTHONIOENCODING=UTF-8 \
     WERKZEUG_RUN_MAIN=true \
-    REDIS_HOST=tweetmetric_redis \
+    REDIS_HOST=tweetmetric-redis \
     REDIS_PORT=6379 \
     DEFAULT_MAX_RESULTS=100 \
     RECENT_TWEET_THRESHOLD=3600 \

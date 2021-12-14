@@ -8,4 +8,5 @@ echo "API_KEY_SECRET=\"${API_KEY_SECRET}\"" > .env
 echo "USER_ACCESS_TOKEN=\"${USER_ACCESS_TOKEN}\"" > .env
 echo "USER_ACCESS_TOKEN_SECRET=\"${USER_ACCESS_TOKEN_SECRET}\"" > .env
 echo "BEARER_TOKEN=\"${BEARER_TOKEN_P1}%${BEARER_TOKEN_P2}%${BEARER_TOKEN_P3}\"" > .env
-docker-compose -f docker-compose.yml up -d --force-recreate
+
+docker-compose up -d --force-recreate
