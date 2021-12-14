@@ -1,0 +1,23 @@
+version: "3.3"
+
+services: 
+  tweetmetric_redis:
+    image: redis:latest
+    container_name: prodit_redis
+    restart: always
+    networks:
+      - tweetmetric
+  tweetmetric_app:
+    image: comworkio/tweetmetric:latest
+    container_name: tweetmetric
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    env_file: 
+      - .env
+    networks:
+      - tweetmetric
+
+networks:
+  tweetmetric:
+    driver: bridge

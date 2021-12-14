@@ -13,8 +13,7 @@ The code is in Python, and the frontend uses Dash (a Plotly web interface). Twee
 Run the following commands to install the project and start Redis:
 
 ```shell
-cd src
-pip install -r requirements.txt
+pip install -r src/requirements.txt
 sudo apt install redis
 redis-server
 ```
@@ -33,7 +32,6 @@ Tweetmetric uses private metrics that can only be accessed by the Tweet's owner.
 Your environment should be ready now. To run the server in background :
 
 ```shell
-$ cd src
 $ ./launch.sh
 ```
 

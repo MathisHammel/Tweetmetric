@@ -1,6 +1,8 @@
 import api_secrets
 
 from datetime import datetime
+
+import os
 import redis
 import time
 import traceback
@@ -8,23 +10,22 @@ import tweepy
 
 # With the following settings, the program will fetch between 75k and 491k tweets per month
 # This is below the total rate limits for the API if you don't use the same tokens somewhere else.
-DEFAULT_MAX_RESULTS = 100 # How many tweets are we tracking
-RECENT_TWEET_THRESHOLD = 3600 # Max age (seconds) for a tweet to count as recent
-REFRESH_RATE_IF_RECENT_TWEETS = 600 # Track every x seconds if there is a recent tweet
-REFRESH_RATE_DEFAULT = 3600 # Track every x seconds if no recent tweet
-WATCH_REFRESH_RATE = 300 # Watch for new tweets every x seconds
+DEFAULT_MAX_RESULTS = int(os.environ['DEFAULT_MAX_RESULTS']) # How many tweets are we tracking
+RECENT_TWEET_THRESHOLD = int(os.environ['RECENT_TWEET_THRESHOLD']) # Max age (seconds) for a tweet to count as recent
+REFRESH_RATE_IF_RECENT_TWEETS = int(os.environ['REFRESH_RATE_IF_RECENT_TWEETS']) # Track every x seconds if there is a recent tweet
+REFRESH_RATE_DEFAULT = int(os.environ['REFRESH_RATE_DEFAULT']) # Track every x seconds if no recent tweet
+WATCH_REFRESH_RATE = int(os.environ['WATCH_REFRESH_RATE']) # Watch for new tweets every x seconds
 
 FIELDS_ORDER = ['impression_count', 'retweet_count', 'reply_count', 'like_count', 'quote_count', 'user_profile_clicks', 'url_link_clicks']
 USER_ID = api_secrets.USER_ACCESS_TOKEN.split('-')[0]
 
-redis_cli = redis.Redis(host='localhost', port=6379, db=0)
+redis_cli = redis.Redis(host=os.environ['REDIS_HOST'], port=int(os.environ['REDIS_PORT']), db=0)
 
 tweepy_client = tweepy.Client(bearer_token=api_secrets.BEARER_TOKEN,
                        consumer_key=api_secrets.API_KEY,
                        consumer_secret=api_secrets.API_KEY_SECRET,
                        access_token=api_secrets.USER_ACCESS_TOKEN,
                        access_token_secret=api_secrets.USER_ACCESS_TOKEN_SECRET)
-
 
 def fetch_tweet_metrics(max_results=DEFAULT_MAX_RESULTS):
     query = tweepy_client.get_users_tweets(USER_ID, user_auth=True, max_results=max_results, tweet_fields=['created_at', 'public_metrics', 'non_public_metrics'])
