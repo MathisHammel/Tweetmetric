@@ -16,6 +16,7 @@ TIMEZONE = pytz.timezone('Europe/Paris')
 redis_cli = redis.Redis(host=os.environ['REDIS_HOST'], port=int(os.environ['REDIS_PORT']), db=0)
 
 app = dash.Dash(__name__)
+app.title = os.environ['APP_TITLE']
 
 def render_layout():
     tweet_text = redis_cli.hgetall('tweet_text')

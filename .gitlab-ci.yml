@@ -15,7 +15,7 @@ mirror:
 fetch-loop:
   stage: deliver
   script:
-    - setsid ./ci/docker-deliver.sh "tweetmetric-fetch-loop" "2.3"
+    - setsid ./ci/docker-deliver.sh "tweetmetric-fetch-loop" "2.4"
   only:
     refs:
       - /^(main.*)$/
@@ -31,7 +31,7 @@ fetch-loop:
 viz-server:
   stage: deliver
   script:
-    - setsid ./ci/docker-deliver.sh "tweetmetric-viz-server" "2.3"
+    - setsid ./ci/docker-deliver.sh "tweetmetric-viz-server" "2.4"
   only:
     refs:
       - /^(main.*)$/
