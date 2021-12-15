@@ -44,6 +44,8 @@ $ docker-compose up -d
 
 And that's it.
 
+Note: you can pick only the [docker-compose file](./docker-compose.yml) and create your `.env` file without having to clone all this git repository.
+
 ## Contributions
 
 If you have to add a python dependancies in order to patch or add some features, please complete the [requirements.txt](./src/requirements.txt).

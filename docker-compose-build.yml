@@ -10,6 +10,10 @@ services:
   tweetmetric-viz-server:
     image: comworkio/tweetmetric-viz-server:latest
     container_name: tweetmetric-viz-server
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: viz_server
     env_file: 
       - .env
     networks:
@@ -19,6 +23,10 @@ services:
   tweetmetric-fetch-loop:
     image: comworkio/tweetmetric-fetch-loop:latest
     container_name: tweetmetric-fetch-loop
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: fetch_loop
     env_file: 
       - .env
     networks:
