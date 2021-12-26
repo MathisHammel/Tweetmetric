@@ -10,7 +10,7 @@ mirror:
   only:
     - /^(main.*)$/
   tags:
-    - tweetmetric
+    - mirror
 
 fetch-loop:
   stage: deliver
