@@ -26,7 +26,7 @@ fetch-loop:
       - docker-compose.yml
       - Dockerfile
   tags:
-    - tweetmetric
+    - imagesbuilder
 
 viz-server:
   stage: deliver
@@ -42,7 +42,7 @@ viz-server:
       - docker-compose.yml
       - Dockerfile
   tags:
-    - tweetmetric
+    - imagesbuilder
 
 deploy:
   stage: deploy
