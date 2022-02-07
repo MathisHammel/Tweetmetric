@@ -1,27 +1,24 @@
-import collections
+import os
 import dash
 from dash import dcc
 from dash import html
 from dash.dependencies import Input, Output
 from datetime import datetime
 import json
-import plotly.express as px
 import plotly.graph_objects as go
 import redis
-import pandas as pd
 import pytz
 
 DISPLAY_CHAR_LIMIT = 100
 FIELDS_ORDER = ['impression_count', 'retweet_count', 'reply_count', 'like_count', 'quote_count', 'user_profile_clicks', 'url_link_clicks']
 TIMEZONE = pytz.timezone('Europe/Paris')
 
-
-redis_cli = redis.Redis(host='localhost', port=6379, db=0)
+redis_cli = redis.Redis(host=os.environ['REDIS_HOST'], port=int(os.environ['REDIS_PORT']), db=0)
 
 app = dash.Dash(__name__)
+app.title = os.environ['APP_TITLE']
 
 def render_layout():
-    tweet_contents = {}
     tweet_text = redis_cli.hgetall('tweet_text')
     tweet_creationdate = redis_cli.hgetall('creation_date')
     sorted_tweets_most_recent = []
@@ -30,15 +27,20 @@ def render_layout():
         sorted_tweets_most_recent.append((date, tweet_id.decode(), tweet_text[tweet_id].decode()))
     sorted_tweets_most_recent.sort(reverse=True)
 
+    val = ""
+    if len(val) >= 1 and len(val[0]) >= 2: 
+        val = sorted_tweets_most_recent[0][1]
+
     return html.Div([
         dcc.Graph(id='graph',
             style={'height': '90vh'}),
+
         dcc.Dropdown(
             id='tweet-selector',
             options=[
                 {'label': tweet[2] if len(tweet[2]) < DISPLAY_CHAR_LIMIT else tweet[2][:DISPLAY_CHAR_LIMIT]+'...', 'value': tweet[1]} for tweet in sorted_tweets_most_recent[:100]
             ],
-            value=sorted_tweets_most_recent[0][1]
+            value=val
         )
     ])
 
@@ -59,8 +61,6 @@ def update_figure(tweet_id):
             metrics[field].append(value)
         metrics['timestamp'].append(datetime.fromtimestamp(int(timestamp), TIMEZONE).isoformat())
         metrics['followers'].append(int(followers_raw.get(timestamp, default_follower_count)))
-    #df = pd.DataFrame(metrics)
-    #fig = px.line(df, x='timestamp', y=['like_count', 'retweet_count']) #, title=tweet_id) 
     
     fig = go.Figure()
     
@@ -81,11 +81,9 @@ def update_figure(tweet_id):
     
     fig.layout[f'yaxis'] = {'visible':False}
 
-    #fig.update_layout(transition_duration=500)
-
     return fig
 
 
 if __name__ == '__main__':
 
-    app.run_server(debug=True, host='0.0.0.0')
+    app.run_server(debug=True, host=os.environ['VIZ_SERVER_HOST'], port = int(os.environ['VIZ_SERVER_PORT']))

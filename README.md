@@ -2,35 +2,56 @@
 
 Tweetmetric allows you to track various metrics on your most recent tweets, such as impressions, retweets and clicks on your profile.
 
-![example image](./dashboard.png)
+![example image](./img/dashboard.png)
 
-The code is in Python, and the frontend uses Dash (a Plotly web interface). Tweetmetric uses Redis  as a fast database
+The code is in Python, and the frontend uses Dash (a Plotly web interface). Tweetmetric uses Redis as a fast database
 
-## Install and run
+## Git repositories
 
-### Installation
+* Build repo: https://gitlab.comwork.io/oss/Tweetmetric (with CI/CD pipelines delivering docker images on docker hub)
+* Github mirror/fork: https://github.com/idrissneumann/Tweetmetric (automatically up to date with the CI/CD)
+* Public gitlab mirror: https://gitlab.com/ineumann/Tweetmetric (automatically up to date with the CI/CD)
+* Original repo: https://github.com/MathisHammel/Tweetmetric
 
-Run the following commands to install the project and start Redis:
+## Docker images
 
-```bash
-pip install redis dash pandas tweepy pytz
-sudo apt install redis
-redis-server
-```
+You'll find ready to use images on docker hub:
 
-If you want the database to be persistent after reboots, enable Redis AOF by adding `appendonly yes` to your Redis configuration file (usually in /etc/redis/redis.conf)
+* [tweetmetric-fetch-loop](https://hub.docker.com/repository/docker/comworkio/tweetmetric-fetch-loop)
+* [tweetmetric-viz-server](https://hub.docker.com/repository/docker/comworkio/tweetmetric-viz-server)
 
-### Getting Twitter tokens
+You'll find how to use those images with this [docker-compose file](./docker-compose.yml).
+
+## Demo
+
+You can access to a [demo here](https://tweetmetric.comwork.io).
+## Getting started
+
+Install `docker` and `docker-compose`.
+
+If you're on windows or mac, you can use [Docker Desktop](https://www.docker.com/products/docker-desktop), you'll have to replace all the `docker-compose` command by `docker compose`.
 
 Tweetmetric uses private metrics that can only be accessed by the Tweet's owner. You need to provide your API keys to the program so it can work.
 - Request a Twitter API key on [The Twitter developer portal](https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api). This only takes a couple minutes, you need to have a verified phone number on your account.
 - Generate a user token for the app you just created on [the developer dashboard](https://developer.twitter.com/en/portal/dashboard)
-- You should now have 5 secrets provided by Twitter. Store them in their corresponding strings inside api_secrets.py
+- You should now have 4 secrets provided by Twitter. Store them in their corresponding strings inside a `.env` file (you can create it from the [`.env.dist`](./.env.dist) example)
 
-### Start
+```shell
+$ cp .env.dist .env
+# replace all the variables in the .env file
+$ docker-compose up -d
+```
 
-Your environment should be ready now. To run the server in background :
+And that's it.
 
-`./launch.sh` 
+Note: you can pick only the [docker-compose file](./docker-compose.yml) and create your `.env` file without having to clone all this git repository.
 
-This command displays server logs, but exiting with Ctrl-C will not kill the server.
+## Contributions
+
+If you have to add a python dependancies in order to patch or add some features, please complete the [requirements.txt](./src/requirements.txt).
+
+If you need to rebuild the images because you made some changes:
+
+```shell
+$ docker-compose up -d --build
+```

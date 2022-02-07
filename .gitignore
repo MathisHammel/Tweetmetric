@@ -1,0 +1,74 @@
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.DS_Store
+.settings/
+.loadpath
+.recommenders
+
+.~lock.cv_en.odt#
+.~lock.cv_fr.odt#
+
+# Intellij
+*.iml
+.idea
+
+# Eclipse Core
+.project
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+.cproject
+
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# Tern plugin
+.tern-project
+
+# TeXlipse plugin
+.texlipse
+
+# STS (Spring Tool Suite)
+.springBeans
+
+# Code Recommenders
+.recommenders/
+
+# Packages
+*.tgz
+*.tar.gz
+*.rpm
+*.zip
+
+target/
+hs_err_pid*.log
+
+*.workspace
+*.code-workspace
+
+*.pem
+
+.env

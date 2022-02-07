@@ -1,0 +1,37 @@
+version: "3.3"
+
+services: 
+  tweetmetric-redis:
+    image: redis:latest
+    container_name: tweetmetric-redis
+    restart: always
+    networks:
+      - tweetmetric
+  tweetmetric-viz-server:
+    image: comworkio/tweetmetric-viz-server:latest
+    container_name: tweetmetric-viz-server
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: viz_server
+    env_file: 
+      - .env
+    networks:
+      - tweetmetric
+    ports:
+      - 8023:8080
+  tweetmetric-fetch-loop:
+    image: comworkio/tweetmetric-fetch-loop:latest
+    container_name: tweetmetric-fetch-loop
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: fetch_loop
+    env_file: 
+      - .env
+    networks:
+      - tweetmetric
+
+networks:
+  tweetmetric:
+    driver: bridge
