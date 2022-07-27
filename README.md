@@ -17,7 +17,7 @@ Docker images are built and updated from a [mirror repo](https://gitlab.comwork.
 
 ## Demo
 
-You can access a [demo here](http://mathis.h25.io:8050) based on @MathisHammel's tweets.
+You can access a [demo here](https://mathis.h25.io:8050) based on @MathisHammel's tweets.
 
 ## Connect to Twitter
 
